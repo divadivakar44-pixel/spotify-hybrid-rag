@@ -1,0 +1,12 @@
+langchain
+langchain-openai
+langchain-community
+langchain-text-splitters
+faiss-cpu
+pypdf
+neo4j
+python-dotenv
+fastapi
+uvicorn[standard]
+streamlit
+requests

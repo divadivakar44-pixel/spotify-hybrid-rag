@@ -1,0 +1,1 @@
+Copy spotify_web_app_architecture.pdf into this folder and name it spotify_web_app_architecture.pdf.

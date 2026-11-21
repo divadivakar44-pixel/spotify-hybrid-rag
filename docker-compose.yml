@@ -1,0 +1,32 @@
+
+services:
+  backend:
+    build: .
+    container_name: spotify-rag-backend
+    command: uvicorn backend:app --host 0.0.0.0 --port 8000
+    env_file:
+      - .env
+    environment:
+      PDF_PATH: data/spotify_web_app_architecture.pdf
+      VECTOR_DIR: storage/faiss_index
+    volumes:
+      - ./storage:/app/storage
+      - ./data:/app/data:ro
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  frontend:
+    build: .
+    container_name: spotify-rag-frontend
+    command: streamlit run frontend.py --server.address=0.0.0.0 --server.port=8501
+    env_file:
+      - .env
+    environment:
+      API_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
